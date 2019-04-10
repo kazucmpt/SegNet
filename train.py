@@ -1,15 +1,16 @@
-import network
 import os
 import cv2
 import time
 import numpy as np
 import cupy as xp
 import matplotlib.pyplot as plt
-import config
-import loader
-import normalize as n
 from chainer import functions as F
 from chainer import Variable, optimizers, serializers
+
+import network
+import config
+import loader
+import normalize
 
 max_epoch = config.max_epoch
 batch_size = config.batch_size
@@ -58,7 +59,7 @@ def train():
 			imgs_batch, gt_batch = loader.img_loader(imgs_names_batch)
 
 			if img_normalization:
-				imgs_batch = n.normalize(imgs_batch)
+				imgs_batch = normalize.normalize(imgs_batch)
 
 			imgs_batch = Variable(imgs_batch)
 			imgs_batch.to_gpu(0)
@@ -79,7 +80,7 @@ def train():
 			valid_names_batch = valid_imgs_names[perm_valid[i:i + batch_size]]
 			valid_imgs_batch, valid_gt_batch = loader.img_loader(valid_names_batch, valid=True)
 			if img_normalization:
-				valid_imgs_batch = n.normalize(valid_imgs_batch)
+				valid_imgs_batch = normalize.normalize(valid_imgs_batch)
 			
 			valid_imgs_batch = Variable(valid_imgs_batch)
 			valid_imgs_batch.to_gpu(0)
