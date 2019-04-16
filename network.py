@@ -43,13 +43,10 @@ class SegNet(Chain):
 
 		h = F.relu(self.bn_enco1_1(self.enco1_1(x)))
 		h, idx1 = F.max_pooling_2d(h, 2, stride=2, return_indices=True)
-
 		h = F.relu(self.bn_enco2_1(self.enco2_1(h)))
 		h, idx2 = F.max_pooling_2d(h, 2, stride=2, return_indices=True) 
-
 		h = F.relu(self.bn_enco3_1(self.enco3_1(h)))
 		h, idx3 = F.max_pooling_2d(h, 2, stride=2, return_indices=True) 
-
 		h = F.relu(self.bn_enco4_1(self.enco4_1(h)))
 		if dropout:
 			h = F.dropout(h)
@@ -57,13 +54,10 @@ class SegNet(Chain):
 
 		h = F.relu(self.bn_deco4_1(self.deco4_1(h)))
 		h = F.unpooling_2d(h, ksize=2, stride=2, outsize=(idx3.shape[2], idx3.shape[3]))
-	
 		h = F.relu(self.bn_deco3_1(self.deco3_1(h)))
 		h = F.unpooling_2d(h, ksize=2, stride=2, outsize=(idx2.shape[2], idx2.shape[3]))
-
 		h = F.relu(self.bn_deco2_1(self.deco2_1(h)))
 		h = F.unpooling_2d(h, ksize=2, stride=2, outsize=(idx1.shape[2], idx1.shape[3]))
-
 		h = F.relu(self.bn_deco1_1(self.deco1_1(h)))
 		h = F.unpooling_2d(h, ksize=2, stride=2, outsize=(x.shape[2], x.shape[3]))
 
@@ -81,57 +75,40 @@ class UNet(Chain):
 
 			self.enco1_1 = L.Convolution2D(None,  64, ksize=3, stride=1, pad=1)
 			self.enco1_2 = L.Convolution2D(None,  64, ksize=3, stride=1, pad=1)
-
 			self.enco2_1 = L.Convolution2D(None, 128, ksize=3, stride=1, pad=1)
-			self.enco2_2 = L.Convolution2D(None, 128, ksize=3, stride=1, pad=1)
-			
+			self.enco2_2 = L.Convolution2D(None, 128, ksize=3, stride=1, pad=1)	
 			self.enco3_1 = L.Convolution2D(None, 256, ksize=3, stride=1, pad=1)
-			self.enco3_2 = L.Convolution2D(None, 256, ksize=3, stride=1, pad=1)
-			
+			self.enco3_2 = L.Convolution2D(None, 256, ksize=3, stride=1, pad=1)	
 			self.enco4_1 = L.Convolution2D(None, 512, ksize=3, stride=1, pad=1)
 			self.enco4_2 = L.Convolution2D(None, 512, ksize=3, stride=1, pad=1)
-
 			self.enco5_1 = L.Convolution2D(None,1012, ksize=3, stride=1, pad=1)
-
 			self.deco6_1 = L.Convolution2D(None,1012, ksize=3, stride=1, pad=1)
 			self.deco6_2 = L.Convolution2D(None, 512, ksize=3, stride=1, pad=1)
-
 			self.deco7_1 = L.Convolution2D(None, 512, ksize=3, stride=1, pad=1)
 			self.deco7_2 = L.Convolution2D(None, 256, ksize=3, stride=1, pad=1)
-			
 			self.deco8_1 = L.Convolution2D(None, 256, ksize=3, stride=1, pad=1)
 			self.deco8_2 = L.Convolution2D(None, 128, ksize=3, stride=1, pad=1)
-			
 			self.deco9_1 = L.Convolution2D(None, 128, ksize=3, stride=1, pad=1)
 			self.deco9_2 = L.Convolution2D(None,  64, ksize=3, stride=1, pad=1)
 			self.deco9_3 = L.Convolution2D(None,  64, ksize=3, stride=1, pad=1)
 
 			self.final_layer = L.Convolution2D(None, n_class, ksize=1)
 
-
 			self.bn1_1 = L.BatchNormalization(  64)
 			self.bn1_2 = L.BatchNormalization(  64)
-
 			self.bn2_1 = L.BatchNormalization( 128)
 			self.bn2_2 = L.BatchNormalization( 128)
-			
 			self.bn3_1 = L.BatchNormalization( 256)
 			self.bn3_2 = L.BatchNormalization( 256)
-			
 			self.bn4_1 = L.BatchNormalization( 512)
 			self.bn4_2 = L.BatchNormalization( 512)
-
 			self.bn5_1 = L.BatchNormalization(1012)
-
 			self.bn6_1 = L.BatchNormalization(1012)
 			self.bn6_2 = L.BatchNormalization( 512)
-
 			self.bn7_1 = L.BatchNormalization( 512)
 			self.bn7_2 = L.BatchNormalization( 256)
-
 			self.bn8_1 = L.BatchNormalization( 256)
 			self.bn8_2 = L.BatchNormalization( 128)
-
 			self.bn9_1 = L.BatchNormalization( 128)
 			self.bn9_2 = L.BatchNormalization(  64)
 			self.bn9_3 = L.BatchNormalization(  64)
@@ -142,7 +119,6 @@ class UNet(Chain):
 
 		h1_1 = F.relu(self.bn1_1(self.enco1_1(x)))
 		h1_2 = F.relu(self.bn1_2(self.enco1_2(h1_1)))
-
 		pool1 = F.max_pooling_2d(h1_2, 2, stride=2, return_indices=False) #(batchsize,  64, 180, 240)
 
 		h2_1 = F.relu(self.bn2_1(self.enco2_1(pool1)))
