@@ -2,7 +2,7 @@
 
 Detail:[Qiita](https://qiita.com/physics303/items/3fcb0af825a32f48c42e) written in Japanese
 
-## How to use it?
+## How to run it?
 
 1. Clone it.
 2. You have to download CamVid dataset from https://github.com/alexgkendall/SegNet-Tutorial. Make "dataset" directory and put them into the directory.
