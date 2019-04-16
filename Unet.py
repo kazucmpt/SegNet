@@ -6,9 +6,8 @@ from chainer import Chain
 
 n_class = config.n_class
 LRN = config.LRN
-dropout = config.dropout
 
-class SegNet(Chain):
+class UNet(Chain):
 
 	def __init__(self, n_class=n_class):
 		super().__init__()
