@@ -18,3 +18,17 @@ Detail:[Qiita](https://qiita.com/physics303/items/3fcb0af825a32f48c42e) written 
 		python3 test.py
 		
 	and "predicted_imgs" directory will be made. You can see predicted semantic segmantation images in the directory.  
+
+If you want to use U-Net, you have to change 
+
+	network.SegNet()
+
+to
+
+	network.UNet()
+	
+in train.py and test.py.
+
+## Result
+
+![a](https://user-images.githubusercontent.com/25736044/56211704-6e63bd00-6093-11e9-9444-67dd34201aaa.png)
