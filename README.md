@@ -31,4 +31,4 @@ in train.py and test.py.
 
 ## Result
 
-![a](https://user-images.githubusercontent.com/25736044/56211704-6e63bd00-6093-11e9-9444-67dd34201aaa.png)
+![a](https://user-images.githubusercontent.com/25736044/56456210-120ae100-63a4-11e9-81bc-08c50dd5c774.png)
